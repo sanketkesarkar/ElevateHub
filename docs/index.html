@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="ElevateHub: a MERN course marketplace where instructors publish video courses and learners enroll, watch and discuss. Try both roles in your browser.">
+<meta property="og:title" content="ElevateHub | Teach a course. Learn from one.">
+<meta property="og:description" content="React, Redux, Material UI, Express and MongoDB. Switch between instructor and learner and watch every API call.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>ElevateHub | Teach a course. Learn from one.</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="#"><img src="assets/logo.png" alt="" width="30" height="30"> ElevateHub</a>
+  <nav aria-label="Main navigation">
+    <a href="#demo">Demo</a>
+    <a href="#architecture">Architecture</a>
+    <a href="https://github.com/sanketkesarkar/ElevateHub">GitHub ↗</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">MERN COURSE MARKETPLACE · TWO ROLES, ONE LOGIN</div>
+    <h1>Teach a course.<br><span>Learn from one.</span></h1>
+    <p class="intro">Instructors publish video courses. Learners browse, enroll, watch and discuss them. One React app, one Express API, and role-based routing that gives each side its own experience.</p>
+    <div class="actions">
+      <a class="button" href="#demo">Try both roles ↓</a>
+      <a class="button secondary" href="https://github.com/sanketkesarkar/ElevateHub">View source ↗</a>
+    </div>
+    <div class="tags"><span>React 18</span><span>Redux Toolkit</span><span>Material UI 6</span><span>Express</span><span>MongoDB</span></div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="float-card c1"><div class="thumb t-react"><b>⚛</b></div><strong>Master React Basics</strong><small>3 lessons · $49</small><em>Add to Dashboard</em></div>
+    <div class="float-card c2"><div class="thumb t-python"><b>🐍</b></div><strong>Introduction to Python</strong><small>3 lessons · $39</small><em>Watch Course</em></div>
+    <div class="float-card c3"><div class="thumb t-data"><b>📊</b></div><strong>Data Science Essentials</strong><small>2 lessons · $59</small><em>Add to Dashboard</em></div>
+    <div class="chip-req"><i>POST</i> /course/add <b>201</b></div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="eyebrow">01 / SEE IT IN CONTEXT</div>
+  <h2>Click through the app. Watch the API answer.</h2>
+  <p class="description">This is a working model of ElevateHub's screens and endpoints. Sign in as either role, enroll, post a comment or publish a course, and every request appears beside the app.</p>
+  <div class="sample-note"><strong>Browser simulation</strong> · Sample courses and users, stored in this page only. Routes, request bodies and query logic mirror the repository's Express code. Nothing is sent to a server.</div>
+
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Sign in as">
+      <span class="seg-label">Signed in as</span>
+      <button data-role="user" aria-pressed="true">Learner</button>
+      <button data-role="instructor" aria-pressed="false">Instructor</button>
+    </div>
+    <div class="seg" role="group" aria-label="Enrollment behavior">
+      <span class="seg-label">Enrollment</span>
+      <button data-mode="current" aria-pressed="true">Current build</button>
+      <button data-mode="fixed" aria-pressed="false">Proposed fix</button>
+    </div>
+    <button class="reset" id="reset">↺ Reset data</button>
+  </div>
+
+  <div class="workbench">
+    <div class="window">
+      <div class="chrome">
+        <span class="lights"><i></i><i></i><i></i></span>
+        <span class="url" id="url">elevatehub.app/courses</span>
+      </div>
+      <div class="app-nav">
+        <span class="app-brand"><img src="assets/logo.png" alt="" width="22" height="22"> ElevateHub</span>
+        <nav class="app-links" id="app-links" aria-label="App navigation"></nav>
+        <span class="avatar" id="avatar" title=""></span>
+      </div>
+      <div class="screen" id="screen" aria-live="polite"></div>
+    </div>
+
+    <aside class="api">
+      <div class="api-head">
+        <span>API REQUESTS</span>
+        <span class="db" id="db"></span>
+      </div>
+      <ol class="api-log" id="api-log"></ol>
+    </aside>
+  </div>
+
+  <div class="explain" id="explain" aria-live="polite"></div>
+</section>
+
+<section id="architecture">
+  <div class="eyebrow">02 / UNDER THE HOOD</div>
+  <h2>From click to collection.</h2>
+  <div class="architecture">
+    <article><span>01</span><h3>Route by role</h3><p>React Router wraps every page in a ProtectedRoute with allowed roles. Instructors land on Home, learners on the course catalog.</p></article>
+    <article><span>02</span><h3>Hold the session</h3><p>Redux Toolkit stores role and user ID after login and rehydrates them from localStorage, so a refresh keeps you signed in.</p></article>
+    <article><span>03</span><h3>Call the API</h3><p>A shared Axios instance talks to nine Express endpoints for users, courses and discussions. Multer handles profile photo uploads.</p></article>
+    <article><span>04</span><h3>Store in MongoDB</h3><p>Mongoose models for users, courses and discussions, with bcrypt-hashed passwords and comments populated with author names.</p></article>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">03 / ENGINEERING NOTES</div>
+  <h2>The details that changed the design.</h2>
+  <div class="lessons">
+    <article><h3>Enrolling should not copy.</h3><p>Add to Dashboard saves a full copy of the course. Copies appear in every catalog and comments land on the copy. An Enrollment model linking learner to course fixes both.</p></article>
+    <article><h3>The server has to know who's asking.</h3><p>Routes read userId and role from the query string, so access control lives in the browser. A JWT on login lets the server decide.</p></article>
+    <article><h3>Uploads need somewhere to live.</h3><p>Profile photos are saved, but the field isn't in the User schema, so Mongoose drops it. On Render's temporary disk the file would vanish anyway.</p></article>
+  </div>
+  <div class="status">
+    <div><strong>9 API endpoints</strong><p>Users, courses and discussions across three Mongoose models.</p></div>
+    <div><strong>9 pages, 2 roles</strong><p>Role-gated routes with light and dark Material UI themes.</p></div>
+    <div><strong>Team of five</strong><p>Built with Hritik Singh, Vivek Mishra, Reva Pethe and Neha Mahangade.</p></div>
+  </div>
+  <p class="fine-print">Current limitations: no server-side authentication yet, enrollments duplicate courses, profile photos don't persist, and prices are display-only. The Proposed fix mode in the demo shows a design, not code in the repository.</p>
+</section>
+
+<section class="closing">
+  <div class="eyebrow">EXPLORE THE PROJECT</div>
+  <h2>Two sides of the same course.</h2>
+  <p>The goal is a marketplace where teaching and learning share one source of truth.</p>
+  <a class="button" href="https://github.com/sanketkesarkar/ElevateHub">Explore ElevateHub on GitHub ↗</a>
+</section>
+</main>
+
+<footer>
+  <span>ElevateHub · Team project, published by Sanket Kesarkar</span>
+  <a href="https://github.com/sanketkesarkar/ElevateHub">Source code ↗</a>
+</footer>
+<script src="demo.js"></script>
+</body>
+</html>
